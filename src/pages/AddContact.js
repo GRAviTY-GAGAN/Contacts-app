@@ -20,7 +20,8 @@ import {
 import { readAndCompressImage } from "browser-image-resizer";
 
 // configs for image resizing
-//TODO: add image configurations
+//TODO:DONE add image configurations
+import { imageConfig } from "../utils/config";
 
 import { MdAddCircleOutline } from "react-icons/md";
 
@@ -33,6 +34,7 @@ import { CONTACT_TO_UPDATE } from "../context/action.types";
 import { useHistory } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { type } from "@testing-library/user-event/dist/type";
 
 const AddContact = () => {
   // destructuring state and dispatch from context state
@@ -73,6 +75,66 @@ const AddContact = () => {
   // To upload image to firebase and then set the the image link in the state of the app
   const imagePicker = async e => {
     // TODO: upload image and set D-URL to state
+
+    try {
+      
+      const file = e.target.files[0];
+
+      var metadata = {
+        contentType: file.type
+      } 
+
+
+      let resizedImage = readAndCompressImage(file, imageConfig);
+
+      const storageRef = firebase.storage().ref();
+      var uploadTask = storageRef
+      .child('images/' + file.name)
+      .put(resizedImage, metadata);
+
+      //.on is a firebase event
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {   //.storage is the trigger point where things are going to happen, if things are going successfully its going to give a snapshot
+          setIsUploading(true);
+          var progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED:
+              setIsUploading(false);
+              console.log("Uploading is paused");
+              break;
+            case firebase.storage.TaskState.RUNNING:
+              console.log("Uploading in progress...");
+              break;
+          }
+          if (progress == 100) {
+            setIsUploading(fail);  //so that the spinner log can stop
+            toast("Uploaded", {type: 'success'});
+          }
+
+
+
+        }, //this entire curly brace is the snapshot object. 
+
+        error => {
+          toast('something is wrong in the state change', {type: 'error'})
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL()
+          .then( downloadURL => {
+            setDownloadUrl(downloadURL)
+          })
+          .catch(error => {
+            console.log(error);
+          })
+        }
+
+      );
+
+
+    } catch (error) {
+      console.error(error);
+      toast( 'Something went wrong', {type: 'error'});
+    }
   };
 
   // setting contact to firebase DB
