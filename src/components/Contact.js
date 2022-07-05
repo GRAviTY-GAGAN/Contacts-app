@@ -8,28 +8,54 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 
 //TODO: add firebase
+import firebase from "firebase/app";
 
 // context stuffs
-//TODO: import context and action: update and single_contact
+//TODO:DONE import context and action: update and single_contact
+import { ContactContext } from "../context/Context";
+import {CONTACT_TO_UPDATE, SET_SINGLE_CONTACT} from '../context/action.types'
 
 import { useHistory } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { type } from "@testing-library/user-event/dist/type";
 
 const Contact = ({ contact, contactKey }) => {
-  //TODO: destructuring dispatch from the context
+  //TODO:DONE destructuring dispatch from the context
+  const {dispatch} = useContext(ContactContext)
 
   // history hooks to get history
   const history = useHistory();
 
   // to delete the contact when delete contact is clicked
   const deleteContact = () => {
-    //TODO: create this method from firebase
+    //TODO: DONE create this method from firebase
+    firebase.database()
+    .ref(`/contacts/${contactKey}`)
+    .remove()
+    .then( () => {
+      toast("Deleted successfully", {type: "warning"})
+    })
+    .catch(error => console.log(error))
   };
 
   // update the star/important contact ,ie, star it or unstar the single contact
   const updateImpContact = () => {
-    //TODO: update (star) contact, use contactKey
+    //TODO:DONE update (star) contact, use contactKey
+    firebase.database()
+    .ref(`/contacts/${contactKey}`)
+    .update(
+      {
+        star: !contact.star
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    .then(() => {
+      toast("contact updated", {type: "info"})
+    })
+    .catch(error => console.log(error))
   };
 
   // when the update icon/ pen ion is clicked
