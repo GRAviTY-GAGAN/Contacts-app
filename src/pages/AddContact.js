@@ -34,7 +34,6 @@ import { CONTACT_TO_UPDATE } from "../context/action.types";
 import { useHistory } from "react-router-dom";
 
 import { toast } from "react-toastify";
-import { type } from "@testing-library/user-event/dist/type";
 
 const AddContact = () => {
   // destructuring state and dispatch from context state
@@ -179,7 +178,9 @@ const AddContact = () => {
   // firing when the user click on submit button or the form has been submitted
   const handleSubmit = e => {
     e.preventDefault();
+    isUpdate ? updateContact() : addContact()
 
+    toast('success', {type: "success"})
     // isUpdate wll be true when the user came to update the contact
     // when their is contact then updating and when no contact to update then adding contact
     //TODO: set isUpdate value
