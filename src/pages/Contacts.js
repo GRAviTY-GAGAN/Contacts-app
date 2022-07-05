@@ -23,8 +23,8 @@ const Contacts = () => {
     dispatch({
       type: CONTACT_TO_UPDATE,
       payload: null,
-      key: null,
-    })
+      key: null
+    });
     history.push("/contact/add");
   };
 
@@ -42,15 +42,16 @@ const Contacts = () => {
     <Container className="mt-4">
       {/* TODO: Loop through FIREBASE objects  */}
       {contacts.length === 0 && !isLoading ? (
-        <div className="Center text-large text-primary">No Contacts found in firebase</div>
+        <div className="Center text-large text-primary">
+          NO Contacts found in firebase
+        </div>
       ) : (
         <ListGroup>
-          {/* for better understanding read more about Objects.entries  */} 
-          {Object.entries(contacts).map(([key, value]) => (   
+          {Object.entries(contacts).map(([key, value]) => (
             <ListGroupItem key={key}>
               <Contact contact={value} contactKey={key} />
             </ListGroupItem>
-          ))}     
+          ))}
         </ListGroup>
       )}
       <MdAdd className="fab icon " onClick={AddContact} />
