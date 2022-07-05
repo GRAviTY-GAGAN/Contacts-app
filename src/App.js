@@ -31,7 +31,7 @@ import PageNotFound from "./pages/PageNotFound";
 // context api stuffs
 //TODO: DONE  import reducers and contexts
 import reducer from "./context/reducer";
-import ContactContext from "./context/Context";
+import { ContactContext } from "./context/Context";
 import {SET_CONTACT, SET_LOADING }  from './context/action.types';
 
 //initlizeing firebase app with the firebase config which are in ./utils/firebaseConfig
@@ -79,7 +79,7 @@ const App = () => {
 
   return (
     <Router>
-      <ContactContext.Provider value={{state, dispatch}}>
+      <ContactContext.Provider value={{ state , dispatch }}>
         <ToastContainer />
         <Header />
         <Container>
