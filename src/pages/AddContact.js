@@ -188,7 +188,7 @@ const AddContact = () => {
 
     // after adding/updating contact then sending to the contacts
     // TODO :- also sending when their is any errors
-    history.push("/contacts-app");
+    history.push("/contacts-app/");
   };
 
   // return the spinner when the image has been added in the storage
