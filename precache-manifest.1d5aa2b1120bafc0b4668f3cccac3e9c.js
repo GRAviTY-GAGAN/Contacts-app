@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bf1e5a4b1b94347ab801204d7ff8022f",
+    "revision": "a7d7c3861306745566985a3f74406191",
     "url": "/contacts-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/contacts-app/static/css/2.ecc47118.chunk.css"
   },
   {
-    "revision": "55083f1d4afa82acee36",
+    "revision": "0f4ba1318b1ea8df4e96",
     "url": "/contacts-app/static/css/main.bcb5a572.chunk.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/contacts-app/static/js/2.97152ecb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "55083f1d4afa82acee36",
-    "url": "/contacts-app/static/js/main.e5f2cca1.chunk.js"
+    "revision": "0f4ba1318b1ea8df4e96",
+    "url": "/contacts-app/static/js/main.d85b57a7.chunk.js"
   },
   {
     "revision": "4e0e34f265fae8f33b01b27ae29d9d6f",
-    "url": "/contacts-app/static/js/main.e5f2cca1.chunk.js.LICENSE.txt"
+    "url": "/contacts-app/static/js/main.d85b57a7.chunk.js.LICENSE.txt"
   },
   {
     "revision": "2f37bc2dd493924bf9d2",
